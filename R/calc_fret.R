@@ -7,5 +7,8 @@
 #' @export
 #'
 calc_fret <- function(donor, acceptor) {
+  stopifnot(is.numeric(donor))
+  stopifnot(is.numeric(acceptor))
+
   acceptor / (donor + acceptor)
 }
