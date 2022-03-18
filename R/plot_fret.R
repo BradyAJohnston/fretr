@@ -97,3 +97,67 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
       panel.grid.minor = ggplot2::element_blank()
     )
 }
+
+#' Plot Chromatograms of Raw don & acc and FRET Data
+#'
+#' @param data Data frame containing columns for time, don, acc, and fret
+#'
+#' @return `ggplot` object.
+#' @export
+#'
+plot_fret_chrom <- function(data) {
+  data <- data %>%
+    dplyr::pivot_longer(c(fret, don, acc))
+
+  fret_plot <- data %>%
+    dplyr::filter(name == "fret") %>%
+    ggplot2::ggplot(ggplot2::aes(time, value)) +
+    ggplot2::geom_line(ggplot2::aes(colour = name)) +
+    ggplot2::scale_y_continuous(
+      breaks = seq(0, 1, 0.2),
+      name = "FRET"
+    ) +
+    ggplot2::coord_cartesian(
+      ylim = c(0, 1)
+    ) +
+    ggplot2::scale_x_continuous(
+      name = "Time (s)",
+      expand = ggplot2::expansion(c(0.02, 0.02))
+    ) +
+    ggplot2::theme_light() +
+    ggplot2::scale_colour_manual(values = trace_colours) +
+    ggplot2::guides(colour = "none") +
+    ggplot2::theme(
+      axis.text.x = ggplot2::element_blank(),
+      axis.title.x = ggplot2::element_blank(),
+      axis.ticks.x = ggplot2::element_blank(),
+      plot.margin = ggplot2::margin(b = 0)
+    )
+
+  raw_plot <- data %>%
+    dplyr::filter(name != "fret") %>%
+    ggplot2::ggplot(ggplot2::aes(time, value)) +
+    ggplot2::geom_line(ggplot2::aes(colour = name)) +
+    ggplot2::scale_y_continuous(
+      name = "Fluorescence"
+    ) +
+    ggplot2::coord_cartesian(
+      ylim = c(0, NA)
+    ) +
+    ggplot2::scale_x_continuous(
+      name = "Time (s)",
+      expand = ggplot2::expansion(c(0.02, 0.02))
+    ) +
+    ggplot2::guides(colour = "none") +
+    ggplot2::theme_light() +
+    ggplot2::theme(
+      plot.margin = ggplot2::margin(t = 0)
+    ) +
+    ggplot2::scale_colour_manual(values = trace_colours)
+
+
+  patchwork::wrap_plots(
+    fret_plot, raw_plot,
+    ncol = 1
+  )
+}

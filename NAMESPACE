@@ -3,5 +3,6 @@
 export(bin_transitions)
 export(calc_fret)
 export(plot_fret)
+export(plot_fret_chrom)
 export(plot_tdp)
 export(pred_fret)
