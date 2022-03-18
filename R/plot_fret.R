@@ -101,11 +101,22 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
 #' Plot Chromatograms of Raw don & acc and FRET Data
 #'
 #' @param data Data frame containing columns for time, don, acc, and fret
+#' @param trace_colours Named vector with names of `fret`, `don` and `acc` for
+#'   colouring the lines for the traces.
 #'
 #' @return `ggplot` object.
 #' @export
 #'
-plot_fret_chrom <- function(data) {
+plot_fret_chrom <- function(data, trace_colours = NULL) {
+
+  if (is.null(trace_colours)) {
+    trace_colours <- c(
+      "fret" = "gray30",
+      "don" = MetBrewer::met.brewer("Cross", n = 8, type = "discrete")[7],
+      "acc" = MetBrewer::met.brewer("Cross", n = 8, type = "discrete")[3]
+    )
+  }
+
   data <- data %>%
     tidyr::pivot_longer(c(fret, don, acc))
 
@@ -131,7 +142,7 @@ plot_fret_chrom <- function(data) {
       axis.text.x = ggplot2::element_blank(),
       axis.title.x = ggplot2::element_blank(),
       axis.ticks.x = ggplot2::element_blank(),
-      plot.margin = ggplot2::margin(b = 0)
+      plot.margin = ggplot2::margin(b = 0, 5.5, 5.5, 5.5, "pt")
     )
 
   raw_plot <- data %>%
@@ -151,7 +162,7 @@ plot_fret_chrom <- function(data) {
     ggplot2::guides(colour = "none") +
     ggplot2::theme_light() +
     ggplot2::theme(
-      plot.margin = ggplot2::margin(t = 0)
+      plot.margin = ggplot2::margin(t = 0, 5.5, 5.5, 5.5, "pt")
     ) +
     ggplot2::scale_colour_manual(values = trace_colours)
 
