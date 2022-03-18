@@ -51,3 +51,49 @@ plot_fret <- function(R0 = 54, dis_range = 1:120) {
 
 }
 
+
+#' Create a Transition Density Plot
+#'
+#' @param data Data frame with relevant information.
+#' @param from Column that contains from_state data.
+#' @param to Column that contains to_state data.
+#' @param nbins Number of bins for rasterisation of density.
+#' @param contour Logical for the inclusion of contours.
+#'
+#' @return `ggplot` object.
+#' @export
+#'
+plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
+  data %>%
+    ggplot2::ggplot(aes({{ from }}, {{ to }})) +
+    ggplot2::stat_density_2d(
+      ggplot2::aes(
+        fill = ggplot2::after_stat(ndensity),
+        alpha = ggplot2::after_stat(ndensity)
+        ),
+      geom = "raster",
+      n = nbins,
+      contour = contour,
+      h = c(0.2, 0.2)
+    ) +
+    ggplot2::scale_x_continuous(
+      breaks = seq(0, 1, 0.2),
+      expand = ggplot2::expansion()
+      ) +
+    ggplot2::scale_y_continuous(
+      breaks = seq(0, 1, 0.2),
+      expand = ggplot2::expansion()
+      ) +
+    ggplot2::scale_fill_viridis_c(option = "B", direction = 1) +
+    ggplot2::scale_alpha_continuous(range = c(0.4, 1)) +
+    ggplot2::coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
+    ggplot2::guides(alpha = "none", fill = "none") +
+    ggplot2::facet_wrap( ~ rna, nrow = 2) +
+    ggplot2::theme_light() +
+    ggplot2::theme(
+      aspect.ratio = 1,
+      panel.grid = ggplot2::element_line(colour = "gray70"),
+      strip.background = ggplot2::element_rect(fill = "gray30"),
+      panel.grid.minor = ggplot2::element_blank()
+    )
+}
