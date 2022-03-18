@@ -4,10 +4,13 @@
 \alias{plot_fret_chrom}
 \title{Plot Chromatograms of Raw don & acc and FRET Data}
 \usage{
-plot_fret_chrom(data)
+plot_fret_chrom(data, trace_colours = NULL)
 }
 \arguments{
 \item{data}{Data frame containing columns for time, don, acc, and fret}
+
+\item{trace_colours}{Named vector with names of \code{fret}, \code{don} and \code{acc} for
+colouring the lines for the traces.}
 }
 \value{
 \code{ggplot} object.
