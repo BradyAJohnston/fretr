@@ -107,7 +107,7 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
 #'
 plot_fret_chrom <- function(data) {
   data <- data %>%
-    dplyr::pivot_longer(c(fret, don, acc))
+    tidyr::pivot_longer(c(fret, don, acc))
 
   fret_plot <- data %>%
     dplyr::filter(name == "fret") %>%
