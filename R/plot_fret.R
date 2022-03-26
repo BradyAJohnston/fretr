@@ -88,7 +88,7 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
     ggplot2::scale_alpha_continuous(range = c(0.4, 1)) +
     ggplot2::coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
     ggplot2::guides(alpha = "none", fill = "none") +
-    ggplot2::labs(x = "FROM", y = "TO") +
+    ggplot2::labs(x = "Before", y = "After") +
     ggplot2::theme_light() +
     ggplot2::theme(
       aspect.ratio = 1,
