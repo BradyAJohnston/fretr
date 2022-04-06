@@ -43,12 +43,13 @@ plot_fret <- function(R0 = 54, dis_range = 1:120) {
     ggplot2::scale_y_continuous(
       expand = ggplot2::expansion(c(0.01, 0.05))
     ) +
-    ggplot2::labs(x = "Distance",
-                  y = "FRET") +
+    ggplot2::labs(
+      x = "Distance",
+      y = "FRET"
+    ) +
     ggplot2::theme(
       panel.grid = ggplot2::element_line(color = "gray80")
     )
-
 }
 
 
@@ -70,7 +71,7 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
       ggplot2::aes(
         fill = ggplot2::after_stat(ndensity),
         alpha = ggplot2::after_stat(ndensity)
-        ),
+      ),
       geom = "raster",
       n = nbins,
       contour = contour,
@@ -79,11 +80,11 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
     ggplot2::scale_x_continuous(
       breaks = seq(0, 1, 0.2),
       expand = ggplot2::expansion()
-      ) +
+    ) +
     ggplot2::scale_y_continuous(
       breaks = seq(0, 1, 0.2),
       expand = ggplot2::expansion()
-      ) +
+    ) +
     ggplot2::scale_fill_viridis_c(option = "B", direction = 1) +
     ggplot2::scale_alpha_continuous(range = c(0.4, 1)) +
     ggplot2::coord_cartesian(xlim = c(0, 1), ylim = c(0, 1)) +
@@ -108,7 +109,6 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
 #' @export
 #'
 plot_fret_chrom <- function(data, trace_colours = NULL) {
-
   if (is.null(trace_colours)) {
     trace_colours <- c(
       "fret" = "gray30",

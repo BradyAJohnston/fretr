@@ -4,5 +4,7 @@ test_that("FRET prediction works.", {
 })
 
 test_that("Strings don't calculate FRET.", {
-  testthat::expect_error({pred_fret("100")})
+  testthat::expect_error({
+    pred_fret("100")
+  })
 })

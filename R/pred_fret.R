@@ -11,5 +11,5 @@ pred_fret <- function(distance, R0 = 54) {
   stopifnot(is.numeric(distance))
   stopifnot(is.numeric(R0))
 
-  1/(1 + (distance/R0)^6)
+  1 / (1 + (distance / R0)^6)
 }
