@@ -9,11 +9,11 @@
 #'
 #' @examples
 #' library(fretr)
-#' plot_fret(70, seq(150))
-plot_fret <- function(R0 = 54, dis_range = 1:120) {
+#' fret_plot(70, seq(150))
+fret_plot <- function(R0 = 54, dis_range = 1:120) {
   df <- data.frame(
     dis = dis_range,
-    fret = fretr::pred_fret(dis_range, R0 = R0)
+    fret = fretr::fret_pred(dis_range, R0 = R0)
   )
 
   ggplot2::ggplot(df, ggplot2::aes(dis, fret)) +
@@ -64,9 +64,9 @@ plot_fret <- function(R0 = 54, dis_range = 1:120) {
 #' @return `ggplot` object.
 #' @export
 #'
-plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
+fret_plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
   data %>%
-    ggplot2::ggplot(aes({{ from }}, {{ to }})) +
+    ggplot2::ggplot(ggplot2::aes({{ from }}, {{ to }})) +
     ggplot2::stat_density_2d(
       ggplot2::aes(
         fill = ggplot2::after_stat(ndensity),
@@ -108,12 +108,12 @@ plot_tdp <- function(data, from, to, nbins = 100, contour = FALSE) {
 #' @return `ggplot` object.
 #' @export
 #'
-plot_fret_chrom <- function(data, trace_colours = NULL) {
+fret_plot_chrom <- function(data, trace_colours = NULL) {
   if (is.null(trace_colours)) {
     trace_colours <- c(
       "fret" = "gray30",
-      "don" = MetBrewer::met.brewer("Cross", n = 8, type = "discrete")[7],
-      "acc" = MetBrewer::met.brewer("Cross", n = 8, type = "discrete")[3]
+      "don" = "#62929a",
+      "acc" = "#ee8577"
     )
   }
 

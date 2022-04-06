@@ -8,7 +8,7 @@
 #' @return `tibble()` with summarised transition data.
 #' @export
 #'
-bin_transitions <- function(data, state, time, frame_time = 0.2) {
+fret_bin_transitions <- function(data, state, time, frame_time = 0.2) {
   data %>%
     dplyr::filter({{ state }} <= 1.2 & {{ state }} >= -0.2) %>%
     dplyr::mutate(

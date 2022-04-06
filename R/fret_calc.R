@@ -6,7 +6,7 @@
 #' @return Numeric vector, the same length as donor and acceptor.
 #' @export
 #'
-calc_fret <- function(donor, acceptor) {
+fret_calc <- function(donor, acceptor) {
   stopifnot(is.numeric(donor))
   stopifnot(is.numeric(acceptor))
 

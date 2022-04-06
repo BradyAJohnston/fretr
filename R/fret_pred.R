@@ -7,7 +7,7 @@
 #' @return Numeric vector of calculated FRET distances, with the same length as
 #'   distance.
 #' @export
-pred_fret <- function(distance, R0 = 54) {
+fret_pred <- function(distance, R0 = 54) {
   stopifnot(is.numeric(distance))
   stopifnot(is.numeric(R0))
 
