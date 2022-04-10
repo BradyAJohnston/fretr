@@ -4,12 +4,14 @@
 \alias{fret_calc}
 \title{Calculate FRET from \code{donor} and \code{acceptor} signals.}
 \usage{
-fret_calc(donor, acceptor)
+fret_calc(donor, trans)
 }
 \arguments{
-\item{donor}{Numeric vector of donor signal.}
+\item{donor}{Signal from the donor channel. (Excitation with the donor laser
+and emission in donor window.)}
 
-\item{acceptor}{Numeric vector of acceptor signal.}
+\item{trans}{Signal from the transfer channel. (Excitation with donor laser
+and emission in acceptor window.)}
 }
 \value{
 Numeric vector, the same length as donor and acceptor.
